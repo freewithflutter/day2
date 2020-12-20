@@ -156,7 +156,7 @@ class _MyAppState extends State<MyApp> {
                   width: double.infinity,
                   color: ksizedBoxColor,
                 ), //Section 1
-                // TODO section 2 starts
+                // TODO section1 ends, 2 starts
                 Container(
                   padding: EdgeInsets.symmetric(vertical: 30, horizontal: 20),
                   child: Column(
@@ -228,14 +228,36 @@ class _MyAppState extends State<MyApp> {
                                 ),
                               ),
                               Container(
-                                height: 200,
+                                height: 455,
+                                width: double.infinity,
                                 child: TabBarView(
                                   children: [
-                                    Center(
-                                      child: Text('your here a'),
+                                    Container(
+                                      child: Column(
+                                        children: [
+                                          Expanded(
+                                            child: GridView.builder(
+                                              gridDelegate:
+                                                  SliverGridDelegateWithFixedCrossAxisCount(
+                                                crossAxisCount: 2,
+                                                mainAxisSpacing: 10,
+                                                crossAxisSpacing: 10,
+                                                childAspectRatio: 0.86,
+                                              ),
+                                              itemCount: 4,
+                                              physics:
+                                                  NeverScrollableScrollPhysics(),
+                                              scrollDirection: Axis.vertical,
+                                              itemBuilder: (context, index) =>
+                                                  FlanzItem(),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                      padding: EdgeInsets.only(top: 10),
                                     ),
                                     Center(
-                                      child: Text('your her bb'),
+                                      child: Text('your her baaab'),
                                     ),
                                   ],
                                 ),
@@ -247,6 +269,108 @@ class _MyAppState extends State<MyApp> {
                     ],
                   ),
                 ),
+                // TODO section2 ends, 3 starts
+                Container(
+                  height: 12,
+                  color: ksizedBoxColor,
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                Column(
+                  children: [
+                    Container(
+                      padding: EdgeInsets.symmetric(horizontal: 20),
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            '기타',
+                            style: TextStyle(
+                                fontSize: 22, fontWeight: FontWeight.bold),
+                          ),
+                        ],
+                      ),
+                    ),
+                    SizedBox(height: 10),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        Column(
+                          children: [
+                            Container(
+                              width: 110,
+                              height: 110,
+                              decoration: BoxDecoration(
+                                image: DecorationImage(
+                                  image: AssetImage('assets/images/drink.png'),
+                                ),
+                                shape: BoxShape.circle,
+                                border: Border.all(width: 1, color: Colors.red),
+                              ),
+                            ),
+                            SizedBox(
+                              height: 15,
+                            ),
+                            Text(
+                              '음료소개',
+                              style: TextStyle(
+                                  fontSize: 20, fontWeight: FontWeight.bold),
+                            ),
+                          ],
+                        ),
+                        Column(
+                          children: [
+                            Container(
+                              width: 110,
+                              height: 110,
+                              decoration: BoxDecoration(
+                                image: DecorationImage(
+                                  image: AssetImage(
+                                      'assets/images/thecondlogo.png'),
+                                ),
+                                shape: BoxShape.circle,
+                                border: Border.all(width: 1, color: kMainColor),
+                              ),
+                            ),
+                            SizedBox(
+                              height: 15,
+                            ),
+                            Text(
+                              '회사소개',
+                              style: TextStyle(
+                                  fontSize: 20, fontWeight: FontWeight.bold),
+                            ),
+                          ],
+                        ),
+                        Column(
+                          children: [
+                            Container(
+                              width: 110,
+                              height: 110,
+                              decoration: BoxDecoration(
+                                image: DecorationImage(
+                                  image: AssetImage('assets/images/advice.png'),
+                                ),
+                                shape: BoxShape.circle,
+                                border: Border.all(
+                                    width: 1, color: klightGrayBlueColor),
+                              ),
+                            ),
+                            SizedBox(
+                              height: 15,
+                            ),
+                            Text(
+                              '개설상담',
+                              style: TextStyle(
+                                  fontSize: 20, fontWeight: FontWeight.bold),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
               ],
             ),
           ),
@@ -255,3 +379,81 @@ class _MyAppState extends State<MyApp> {
     );
   }
 }
+
+class FlanzItem extends StatelessWidget {
+  const FlanzItem({
+    Key key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Container(
+            child: Image.asset(
+              'assets/images/item1.jpg',
+              fit: BoxFit.cover,
+            ),
+            width: 200,
+            height: 140,
+          ),
+          Container(
+            padding: EdgeInsets.only(top: 10),
+            child: Text(
+              '그루스터디카페',
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            ),
+          ),
+          Row(
+            children: [
+              Icon(Icons.location_on_outlined, color: klightGrayBlueColor),
+              Text('월곡역')
+            ],
+          ),
+          Container(
+            width: 200,
+            alignment: Alignment.bottomRight,
+            child: Text.rich(
+              TextSpan(
+                children: <TextSpan>[
+                  TextSpan(
+                    text: '2000',
+                    style: TextStyle(
+                      fontSize: 17,
+                      fontWeight: FontWeight.bold,
+                      color: kMainColor,
+                    ),
+                  ),
+                  TextSpan(
+                    text: '원/시간',
+                    style: TextStyle(
+                      fontSize: 17,
+                      color: Colors.black,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+// GridView.builder(
+// gridDelegate:
+// SliverGridDelegateWithMaxCrossAxisExtent(
+// crossAxisSpacing: 20,
+// mainAxisSpacing: 20,
+// maxCrossAxisExtent: 320,
+// childAspectRatio: 1),
+// scrollDirection: Axis.horizontal,
+// itemCount: 4,
+// itemBuilder: (context, index) =>
+// Container(
+// color: Colors.blue,
+// ),
+// ),
