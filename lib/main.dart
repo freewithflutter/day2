@@ -3,8 +3,7 @@ import 'package:flutter_page_indicator/flutter_page_indicator.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:day2/utill/default.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-
-enum Switch { left, right }
+import 'package:day2/utill/item_lists.dart';
 
 void main() {
   runApp(MyApp());
@@ -24,7 +23,7 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
-      theme: ThemeData(primaryColor: Colors.black),
+      theme: ThemeData(primaryColor: kMainColor),
       home: Scaffold(
         appBar: PreferredSize(
           preferredSize: Size(double.infinity, 50.0),
@@ -98,19 +97,22 @@ class _MyAppState extends State<MyApp> {
                               child: ClipRRect(
                                 borderRadius: BorderRadius.circular(8),
                                 child: new Image.asset(
-                                  'assets/images/Group 123.png',
+                                  'assets/images/mainpopup.png',
                                   fit: BoxFit.contain,
                                 ),
                               ),
                             );
                           },
-                          itemCount: 10,
+                          itemCount: 5,
                           viewportFraction: 1,
                           pagination: new SwiperPagination(
                             margin: new EdgeInsets.all(5.0),
                           ),
                           indicatorLayout: PageIndicatorLayout.NONE,
                           scale: 0.9,
+                          control: SwiperControl(
+                            color: Colors.grey,
+                          ),
                         ),
                       ),
                       Container(
@@ -120,28 +122,9 @@ class _MyAppState extends State<MyApp> {
                         child: ListView.builder(
                           scrollDirection: Axis.horizontal,
                           primary: false,
-                          itemCount: 3,
+                          itemCount: 2,
                           itemBuilder: (context, index) {
-                            // return Container(
-                            //   margin: EdgeInsets.only(right: 10),
-                            //   width: 340,
-                            //   child: Image.asset(
-                            //     'assets/images/popup1.png',
-                            //     fit: BoxFit.cover,
-                            //     'assets/images/popup1.png',
-                            //   ),
-                            // );
-                            return ClipRRect(
-                              borderRadius: BorderRadius.circular(8),
-                              child: Container(
-                                margin: EdgeInsets.only(right: 10),
-                                child: new Image.asset(
-                                  'assets/images/popup1.png',
-                                  width: 340,
-                                  fit: BoxFit.cover,
-                                ),
-                              ),
-                            );
+                            return Popup(popup: popupLists[index]);
                           },
                         ),
                       ),
@@ -249,15 +232,38 @@ class _MyAppState extends State<MyApp> {
                                                   NeverScrollableScrollPhysics(),
                                               scrollDirection: Axis.vertical,
                                               itemBuilder: (context, index) =>
-                                                  FlanzItem(),
+                                                  FlanzItem(item: items[index]),
                                             ),
                                           ),
                                         ],
                                       ),
                                       padding: EdgeInsets.only(top: 10),
                                     ),
-                                    Center(
-                                      child: Text('your her baaab'),
+                                    Container(
+                                      child: Column(
+                                        children: [
+                                          Expanded(
+                                            child: GridView.builder(
+                                              gridDelegate:
+                                                  SliverGridDelegateWithFixedCrossAxisCount(
+                                                crossAxisCount: 2,
+                                                mainAxisSpacing: 10,
+                                                crossAxisSpacing: 10,
+                                                childAspectRatio: 0.86,
+                                              ),
+                                              itemCount: 4,
+                                              physics:
+                                                  NeverScrollableScrollPhysics(),
+                                              scrollDirection: Axis.vertical,
+                                              itemBuilder: (context, index) =>
+                                                  FlanzRightItem(
+                                                      rightItem:
+                                                          rightItems[index]),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                      padding: EdgeInsets.only(top: 10),
                                     ),
                                   ],
                                 ),
@@ -380,10 +386,35 @@ class _MyAppState extends State<MyApp> {
   }
 }
 
+class Popup extends StatelessWidget {
+  const Popup({
+    Key key,
+    this.popup,
+  }) : super(key: key);
+  final PopupLists popup;
+
+  @override
+  Widget build(BuildContext context) {
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(8),
+      child: Container(
+        margin: EdgeInsets.only(right: 10),
+        child: new Image.asset(
+          popup.image,
+          width: 340,
+          fit: BoxFit.cover,
+        ),
+      ),
+    );
+  }
+}
+
 class FlanzItem extends StatelessWidget {
   const FlanzItem({
     Key key,
+    this.item,
   }) : super(key: key);
+  final ItemLists item;
 
   @override
   Widget build(BuildContext context) {
@@ -393,7 +424,7 @@ class FlanzItem extends StatelessWidget {
         children: [
           Container(
             child: Image.asset(
-              'assets/images/item1.jpg',
+              item.image,
               fit: BoxFit.cover,
             ),
             width: 200,
@@ -402,14 +433,14 @@ class FlanzItem extends StatelessWidget {
           Container(
             padding: EdgeInsets.only(top: 10),
             child: Text(
-              '그루스터디카페',
+              item.title,
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
           ),
           Row(
             children: [
               Icon(Icons.location_on_outlined, color: klightGrayBlueColor),
-              Text('월곡역')
+              Text(item.place)
             ],
           ),
           Container(
@@ -419,7 +450,7 @@ class FlanzItem extends StatelessWidget {
               TextSpan(
                 children: <TextSpan>[
                   TextSpan(
-                    text: '2000',
+                    text: item.price,
                     style: TextStyle(
                       fontSize: 17,
                       fontWeight: FontWeight.bold,
@@ -457,3 +488,60 @@ class FlanzItem extends StatelessWidget {
 // color: Colors.blue,
 // ),
 // ),
+class FlanzRightItem extends StatelessWidget {
+  const FlanzRightItem({
+    Key key,
+    this.rightItem,
+  }) : super(key: key);
+  final ItemRightLists rightItem;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Container(
+            child: Image.asset(
+              rightItem.image,
+              fit: BoxFit.cover,
+            ),
+            width: 200,
+            height: 140,
+          ),
+          Container(
+            padding: EdgeInsets.only(top: 10),
+            child: Text(
+              rightItem.title,
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            ),
+          ),
+          Row(
+            children: [
+              Icon(Icons.location_on_outlined, color: klightGrayBlueColor),
+              Text(rightItem.place)
+            ],
+          ),
+          Container(
+            width: 200,
+            alignment: Alignment.bottomRight,
+            child: Text.rich(
+              TextSpan(
+                children: <TextSpan>[
+                  TextSpan(
+                    text: rightItem.price,
+                    style: TextStyle(
+                      fontSize: 17,
+                      fontWeight: FontWeight.bold,
+                      color: kMainColor,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
