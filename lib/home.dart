@@ -4,6 +4,9 @@ import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:day2/utill/default.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:convex_bottom_bar/convex_bottom_bar.dart';
+import 'package:ff_navigation_bar/ff_navigation_bar.dart';
+import 'screens/itemsearch_active.dart';
+import 'package:day2/screens/homeab.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -12,63 +15,92 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   int selectedIndex = 0;
+  var _pages = [
+    HomeScreen3(),
+  ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: PreferredSize(
-        preferredSize: Size(double.infinity, 50.0),
-        child: AppBar(
-          title: Column(
-            children: [
-              SizedBox(
-                height: 5,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  SizedBox(
-                    height: 40,
-                    width: 350,
-                    child: TextField(
-                      decoration: InputDecoration(
-                        contentPadding:
-                            EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-                        enabledBorder: OutlineInputBorder(
-                          borderSide:
-                              BorderSide(width: 1, color: klightGrayBlueColor),
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderSide:
-                              BorderSide(width: 1, color: klightGrayBlueColor),
-                        ),
-                        hintText: '지역,지하철역으로 검색하세요',
-                        hintStyle: TextStyle(color: kSearchTextColor),
-                        suffixIcon: Icon(
-                          Icons.search,
-                          color: kMainColor,
-                        ),
-                      ),
-                    ),
-                  ),
-                  Icon(
-                    Icons.map_outlined,
-                    color: kMainColor,
-                  ),
-                ],
-              ),
-            ],
-          ),
-          backgroundColor: Colors.white,
-          elevation: 0.0,
+      bottomNavigationBar: FFNavigationBar(
+        theme: FFNavigationBarTheme(
+          barBackgroundColor: Colors.white,
+          selectedItemBorderColor: Colors.yellow,
+          selectedItemBackgroundColor: Colors.green,
+          selectedItemIconColor: Colors.white,
+          selectedItemLabelColor: Colors.black,
         ),
+        selectedIndex: selectedIndex,
+        onSelectTab: (index) {
+          setState(() {
+            selectedIndex = index;
+          });
+        },
+        items: [
+          FFNavigationBarItem(
+            iconData: Icons.calendar_today,
+            label: 'Schedule',
+          ),
+          FFNavigationBarItem(
+            iconData: Icons.people,
+            label: 'Contacts',
+          ),
+          FFNavigationBarItem(
+            iconData: Icons.attach_money,
+            label: 'Bills',
+          ),
+          FFNavigationBarItem(
+            iconData: Icons.note,
+            label: 'Notes',
+          ),
+          FFNavigationBarItem(
+            iconData: Icons.settings,
+            label: 'Settings',
+          ),
+        ],
       ),
       body: SingleChildScrollView(
         child: Container(
           width: double.infinity,
           child: Column(
             children: [
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    SizedBox(
+                      height: 40,
+                      width: 350,
+                      child: TextField(
+                        decoration: InputDecoration(
+                          contentPadding: EdgeInsets.symmetric(
+                              vertical: 10, horizontal: 10),
+                          enabledBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                                width: 1, color: klightGrayBlueColor),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                                width: 1, color: klightGrayBlueColor),
+                          ),
+                          hintText: '지역,지하철역으로 검색하세요',
+                          hintStyle: TextStyle(color: kSearchTextColor),
+                          suffixIcon: Icon(
+                            Icons.search,
+                            color: kMainColor,
+                          ),
+                        ),
+                      ),
+                    ),
+                    Icon(
+                      Icons.map_outlined,
+                      color: kMainColor,
+                    ),
+                  ],
+                ),
+              ),
               Container(
                 color: Colors.white,
                 width: double.infinity,
@@ -101,7 +133,9 @@ class _HomeState extends State<Home> {
                         ),
                         indicatorLayout: PageIndicatorLayout.NONE,
                         scale: 0.9,
-                        control: SwiperControl(color: Colors.grey, size: 20),
+                        control: SwiperControl(
+                          color: Colors.grey,
+                        ),
                       ),
                     ),
                     Container(
@@ -370,18 +404,6 @@ class _HomeState extends State<Home> {
           ),
         ),
       ),
-      bottomNavigationBar: ConvexAppBar(
-        controller: TabController(),
-        items: [
-          TabItem(icon: Icons.home, title: 'Home'),
-          TabItem(icon: Icons.map, title: 'Discovery'),
-          TabItem(icon: Icons.add, title: 'Add'),
-          TabItem(icon: Icons.message, title: 'Message'),
-          TabItem(icon: Icons.people, title: 'Profile'),
-        ],
-        initialActiveIndex: 2, //optional, default as 0
-        onTap: (int i) => print('click index=$i'),
-      ),
     );
   }
 }
@@ -531,8 +553,6 @@ class FlanzRightItem extends StatelessWidget {
     );
   }
 }
-
-//TODO About Lists
 
 class ItemLists {
   final String image, title, place, price;
