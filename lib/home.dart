@@ -27,8 +27,8 @@ class _HomeState extends State<Home> {
       bottomNavigationBar: FFNavigationBar(
         theme: FFNavigationBarTheme(
           barBackgroundColor: Colors.white,
-          selectedItemBorderColor: Colors.yellow,
-          selectedItemBackgroundColor: Colors.green,
+          selectedItemBorderColor: Colors.white,
+          selectedItemBackgroundColor: kMainColor,
           selectedItemIconColor: Colors.white,
           selectedItemLabelColor: Colors.black,
         ),
@@ -40,12 +40,12 @@ class _HomeState extends State<Home> {
         },
         items: [
           FFNavigationBarItem(
-            iconData: Icons.calendar_today,
-            label: 'Schedule',
+            iconData: Icons.home,
+            label: '홈',
           ),
           FFNavigationBarItem(
-            iconData: Icons.people,
-            label: 'Contacts',
+            iconData: Icons.search_outlined,
+            label: '공간검색',
           ),
           FFNavigationBarItem(
             iconData: Icons.attach_money,

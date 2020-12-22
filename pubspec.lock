@@ -130,6 +130,7 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.8.0-nullsafety.1"
+<<<<<<< HEAD
   provider:
     dependency: transitive
     description:
@@ -137,6 +138,8 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "4.3.2+3"
+=======
+>>>>>>> 41ff495e438bbe5920830b0eb30cd00339ffc158
   scroll_app_bar:
     dependency: "direct main"
     description:
