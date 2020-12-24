@@ -14,6 +14,7 @@ import 'package:ff_navigation_bar/ff_navigation_bar.dart';
 import 'package:day2/screens/homeab.dart';
 
 class HomeScreen extends StatefulWidget {
+  static final String id = 'homeScreen';
   @override
   _HomeScreenState createState() => _HomeScreenState();
 }

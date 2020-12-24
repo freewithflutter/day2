@@ -1,3 +1,4 @@
+import 'package:day2/screens/searchitem/searchitem_final_screen.dart';
 import 'package:day2/utill/default.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -350,7 +351,7 @@ class SearchItemReserved extends StatelessWidget {
             ),
             FlatButton(
               onPressed: () {
-                Navigator.pushNamed(context, SearchItemReserved.id);
+                Navigator.pushNamed(context, SearchReservedDone.id);
               },
               child: Container(
                 margin: EdgeInsets.symmetric(vertical: 20, horizontal: 10),

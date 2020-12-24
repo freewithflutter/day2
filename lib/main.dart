@@ -1,5 +1,7 @@
 import 'package:day2/home.dart';
+import 'package:day2/screens/home__screen.dart';
 import 'package:day2/screens/searchitem/searchitem_about_screen.dart';
+import 'package:day2/screens/searchitem/searchitem_final_screen.dart';
 import 'package:day2/screens/searchitem/searchitem_reserve_scree.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_page_indicator/flutter_page_indicator.dart';
@@ -44,8 +46,10 @@ class _MyAppState extends State<MyApp> {
         body: Home(),
       ),
       routes: {
+        HomeScreen.id: (context) => HomeScreen(),
         SearchItemAbout.id: (context) => SearchItemAbout(),
         SearchItemReserved.id: (context) => SearchItemReserved(),
+        SearchReservedDone.id: (context) => SearchReservedDone(),
       },
     );
   }

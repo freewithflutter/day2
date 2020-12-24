@@ -48,8 +48,8 @@ class _HomeState extends State<Home> {
             label: '공간검색',
           ),
           FFNavigationBarItem(
-            iconData: Icons.attach_money,
-            label: 'Bills',
+            iconData: FontAwesomeIcons.ticketAlt,
+            label: '쿠폰',
           ),
           FFNavigationBarItem(
             iconData: Icons.note,
