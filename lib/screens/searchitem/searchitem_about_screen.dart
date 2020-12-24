@@ -19,7 +19,7 @@ class SearchItemAbout extends StatelessWidget {
           ),
         ],
         backgroundColor: Color(0x00000000),
-        elevation: 0,
+        elevation: 0.0,
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -237,7 +237,6 @@ class SearchItemAbout extends StatelessWidget {
             ),
             //TODO '공간소개' Start (Sectino2)
             Container(
-              alignment: Alignment.topLeft,
               padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
@@ -279,11 +278,10 @@ class SearchItemAbout extends StatelessWidget {
                     height: 15,
                   ),
                   Container(
-                    width: double.infinity,
-                    height: 400,
                     child: ListView.builder(
-                      physics: NeverScrollableScrollPhysics(),
+                      padding: EdgeInsets.zero,
                       primary: false,
+                      shrinkWrap: true,
                       itemCount: abouts.length,
                       itemBuilder: (context, index) => PlaceAnnounce(
                         about: abouts[index],
