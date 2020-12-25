@@ -17,6 +17,9 @@ class _SearchItemActiveState extends State<SearchItemActive> {
         width: double.infinity,
         child: Column(
           children: [
+            SizedBox(
+              height: 50,
+            ),
             Container(
               padding: EdgeInsets.symmetric(horizontal: 20),
               child: Row(
@@ -175,6 +178,7 @@ class _SearchItemActiveState extends State<SearchItemActive> {
                         children: [
                           Container(
                             child: GridView.builder(
+                              padding: EdgeInsets.zero,
                               gridDelegate:
                                   SliverGridDelegateWithFixedCrossAxisCount(
                                       crossAxisCount: 1,

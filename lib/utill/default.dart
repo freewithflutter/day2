@@ -8,3 +8,4 @@ const kSearchTextColor = Color(0xFF9098B1);
 const kSearchDarkTextColor = Color(0xFF9098B1);
 const kTextDarkGaryColor = Color(0xFF686868);
 const kTextlighGaryColor = Color(0xFFA9A9A9);
+const kGrayLineColor = Color(0xFFDADADA);

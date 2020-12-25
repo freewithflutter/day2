@@ -1,4 +1,5 @@
 import 'package:day2/home.dart';
+import 'package:day2/screens/coupon/coupon_lists_screen.dart';
 import 'package:day2/screens/home__screen.dart';
 import 'package:day2/screens/searchitem/searchitem_about_screen.dart';
 import 'package:day2/screens/searchitem/searchitem_final_screen.dart';
@@ -29,20 +30,20 @@ class _MyAppState extends State<MyApp> {
       title: 'Flutter Demo',
       theme: ThemeData(primaryColor: kMainColor),
       home: Scaffold(
-        appBar: PreferredSize(
-          preferredSize: Size(double.infinity, -5),
-          child: AppBar(
-            title: Column(
-              children: [
-                SizedBox(
-                  height: 5,
-                ),
-              ],
-            ),
-            backgroundColor: Colors.white,
-            elevation: 0,
-          ),
-        ),
+        // appBar: PreferredSize(
+        //   preferredSize: Size(double.infinity, -5),
+        //   child: AppBar(
+        //     title: Column(
+        //       children: [
+        //         SizedBox(
+        //           height: 5,
+        //         ),
+        //       ],
+        //     ),
+        //     backgroundColor: Colors.white,
+        //     elevation: 0,
+        //   ),
+        // ),
         body: Home(),
       ),
       routes: {
@@ -50,6 +51,7 @@ class _MyAppState extends State<MyApp> {
         SearchItemAbout.id: (context) => SearchItemAbout(),
         SearchItemReserved.id: (context) => SearchItemReserved(),
         SearchReservedDone.id: (context) => SearchReservedDone(),
+        CouponLists.id: (context) => CouponLists()
       },
     );
   }
