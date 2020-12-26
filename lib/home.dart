@@ -1,3 +1,4 @@
+import 'package:day2/screens/beverage/beverage_main_screen.dart';
 import 'package:day2/screens/coupon/coupon_main_screen.dart';
 import 'package:day2/screens/home__screen.dart';
 import 'package:day2/screens/searchitem/searchitem_active_screen.dart';
@@ -21,6 +22,7 @@ class _HomeState extends State<Home> {
     HomeScreen(),
     SearchItemActive(),
     CouponMain(),
+    BeverageMain(),
   ];
 
   @override

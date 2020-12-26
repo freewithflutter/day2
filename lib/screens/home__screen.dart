@@ -77,21 +77,19 @@ class _HomeScreenState extends State<HomeScreen> {
                     margin: EdgeInsets.only(top: 10),
                     height: 255,
                     child: new Swiper(
-                      itemBuilder: (BuildContext context, int index) {
-                        return Container(
-                          alignment: Alignment.topLeft,
-                          margin: EdgeInsets.only(
-                            bottom: 10,
+                      itemBuilder: (context, index) => Container(
+                        alignment: Alignment.topLeft,
+                        margin: EdgeInsets.only(
+                          bottom: 10,
+                        ),
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(8),
+                          child: new Image.asset(
+                            'assets/images/mainpopup.png',
+                            fit: BoxFit.contain,
                           ),
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(8),
-                            child: new Image.asset(
-                              'assets/images/mainpopup.png',
-                              fit: BoxFit.contain,
-                            ),
-                          ),
-                        );
-                      },
+                        ),
+                      ),
                       itemCount: 5,
                       viewportFraction: 1,
                       pagination: new SwiperPagination(
@@ -112,9 +110,8 @@ class _HomeScreenState extends State<HomeScreen> {
                       scrollDirection: Axis.horizontal,
                       primary: false,
                       itemCount: 2,
-                      itemBuilder: (context, index) {
-                        return Popup(popup: popupLists[index]);
-                      },
+                      itemBuilder: (context, index) =>
+                          Popup(popup: popupLists[index]),
                     ),
                   ),
                   SizedBox(
