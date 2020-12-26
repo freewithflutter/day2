@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:day2/utill/default.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
+//TODO 상품검색 메인 페이지
+
 class SearchItemActive extends StatefulWidget {
   @override
   _SearchItemActiveState createState() => _SearchItemActiveState();

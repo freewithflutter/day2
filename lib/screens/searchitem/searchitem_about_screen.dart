@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:day2/utill/default.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
+//TODO 아이템 상세 페이지, 공간 예약으로 이동하는 페이지
 class SearchItemAbout extends StatelessWidget {
   static final String id = 'searchItemAbout';
   @override

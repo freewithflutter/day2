@@ -2,6 +2,8 @@ import 'package:day2/screens/home__screen.dart';
 import 'package:day2/utill/default.dart';
 import 'package:flutter/material.dart';
 
+//TODO 예약 완료를 알려주는 페이지
+
 class SearchReservedDone extends StatelessWidget {
   static final String id = 'reservedDone';
   @override

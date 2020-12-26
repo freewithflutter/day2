@@ -13,6 +13,8 @@ import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 import 'package:ff_navigation_bar/ff_navigation_bar.dart';
 import 'package:day2/screens/homeab.dart';
 
+//TODO 홈 화면 페이지
+
 class HomeScreen extends StatefulWidget {
   static final String id = 'homeScreen';
   @override

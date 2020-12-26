@@ -3,7 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../home__screen.dart';
-//TODO 쿠폰 보관함
+//TODO 쿠폰 보관함확인 페이지 보유한 쿠폰<--> 사용한 쿠폰으로 궛ㅇ
 
 class CouponLists extends StatelessWidget {
   static final String id = 'couponLists';

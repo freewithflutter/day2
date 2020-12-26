@@ -2,6 +2,7 @@ import 'package:day2/screens/coupon/coupon_lists_screen.dart';
 import 'package:day2/utill/default.dart';
 import 'package:flutter/material.dart';
 
+//TODO 쿠폰 메인페이지
 class CouponMain extends StatelessWidget {
   @override
   Widget build(BuildContext context) {

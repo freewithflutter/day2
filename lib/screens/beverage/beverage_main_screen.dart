@@ -1,6 +1,8 @@
 import 'package:day2/utill/default.dart';
 import 'package:flutter/material.dart';
 
+//TODO 음료 소개 페이지
+
 class BeverageMain extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
