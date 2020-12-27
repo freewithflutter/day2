@@ -1,4 +1,5 @@
 import 'package:day2/home.dart';
+import 'package:day2/provider/PlaceSearch.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_page_indicator/flutter_page_indicator.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
@@ -12,6 +13,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 import 'package:ff_navigation_bar/ff_navigation_bar.dart';
 import 'package:day2/screens/homeab.dart';
+import 'package:provider/provider.dart';
 
 //TODO 홈 화면 페이지
 
@@ -24,6 +26,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
+    final placeSearch = Provider.of<PlaceSearch>(context, listen: false);
     return SingleChildScrollView(
       child: Container(
         width: double.infinity,
@@ -208,21 +211,28 @@ class _HomeScreenState extends State<HomeScreen> {
                                     children: [
                                       Expanded(
                                         child: GridView.builder(
-                                          padding: EdgeInsets.zero,
-                                          gridDelegate:
-                                              SliverGridDelegateWithFixedCrossAxisCount(
-                                            crossAxisCount: 2,
-                                            mainAxisSpacing: 10,
-                                            crossAxisSpacing: 10,
-                                            childAspectRatio: 0.86,
-                                          ),
-                                          itemCount: 4,
-                                          physics:
-                                              NeverScrollableScrollPhysics(),
-                                          scrollDirection: Axis.vertical,
-                                          itemBuilder: (context, index) =>
-                                              FlanzItem(item: items[index]),
-                                        ),
+                                            padding: EdgeInsets.zero,
+                                            gridDelegate:
+                                                SliverGridDelegateWithFixedCrossAxisCount(
+                                              crossAxisCount: 2,
+                                              mainAxisSpacing: 10,
+                                              crossAxisSpacing: 10,
+                                              childAspectRatio: 0.86,
+                                            ),
+                                            itemCount:
+                                                placeSearch.placeList.length,
+                                            physics:
+                                                NeverScrollableScrollPhysics(),
+                                            scrollDirection: Axis.vertical,
+                                            itemBuilder: (context, index) {
+                                              final place =
+                                                  placeSearch.placeList[index];
+                                              return FlanzItem(
+                                                name: place.name,
+                                                location: place.location,
+                                                price: place.price,
+                                              );
+                                            }),
                                       ),
                                     ],
                                   ),
@@ -398,9 +408,13 @@ class Popup extends StatelessWidget {
 class FlanzItem extends StatelessWidget {
   const FlanzItem({
     Key key,
-    this.item,
+    @required this.name,
+    @required this.location,
+    @required this.price,
   }) : super(key: key);
-  final ItemLists item;
+  final String name;
+  final String location;
+  final int price;
 
   @override
   Widget build(BuildContext context) {
@@ -410,7 +424,7 @@ class FlanzItem extends StatelessWidget {
         children: [
           Container(
             child: Image.asset(
-              item.image,
+              'assets/images/item1.jpg',
               fit: BoxFit.cover,
             ),
             width: 200,
@@ -419,14 +433,14 @@ class FlanzItem extends StatelessWidget {
           Container(
             padding: EdgeInsets.only(top: 10),
             child: Text(
-              item.title,
+              name,
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
           ),
           Row(
             children: [
               Icon(Icons.location_on_outlined, color: klightGrayBlueColor),
-              Text(item.place)
+              Text(location)
             ],
           ),
           Container(
@@ -436,7 +450,7 @@ class FlanzItem extends StatelessWidget {
               TextSpan(
                 children: <TextSpan>[
                   TextSpan(
-                    text: item.price,
+                    text: '$price',
                     style: TextStyle(
                       fontSize: 17,
                       fontWeight: FontWeight.bold,

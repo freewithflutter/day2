@@ -1,4 +1,5 @@
 import 'package:day2/home.dart';
+import 'package:day2/provider/PlaceSearch.dart';
 import 'package:day2/screens/coupon/coupon_lists_screen.dart';
 import 'package:day2/screens/home__screen.dart';
 import 'package:day2/screens/searchitem/searchitem_about_screen.dart';
@@ -9,6 +10,7 @@ import 'package:flutter_page_indicator/flutter_page_indicator.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:day2/utill/default.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:provider/provider.dart';
 
 void main() {
   runApp(MyApp());
@@ -26,33 +28,36 @@ class _MyAppState extends State<MyApp> {
   Switch selectedSwitch;
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(primaryColor: kMainColor),
-      home: Scaffold(
-        // appBar: PreferredSize(
-        //   preferredSize: Size(double.infinity, -5),
-        //   child: AppBar(
-        //     title: Column(
-        //       children: [
-        //         SizedBox(
-        //           height: 5,
-        //         ),
-        //       ],
-        //     ),
-        //     backgroundColor: Colors.white,
-        //     elevation: 0,
-        //   ),
-        // ),
-        body: Home(),
+    return MultiProvider(
+      providers: [ChangeNotifierProvider.value(value: PlaceSearch())],
+      child: MaterialApp(
+        title: 'Flutter Demo',
+        theme: ThemeData(primaryColor: kMainColor),
+        home: Scaffold(
+          // appBar: PreferredSize(
+          //   preferredSize: Size(double.infinity, -5),
+          //   child: AppBar(
+          //     title: Column(
+          //       children: [
+          //         SizedBox(
+          //           height: 5,
+          //         ),
+          //       ],
+          //     ),
+          //     backgroundColor: Colors.white,
+          //     elevation: 0,
+          //   ),
+          // ),
+          body: Home(),
+        ),
+        routes: {
+          HomeScreen.id: (context) => HomeScreen(),
+          SearchItemAbout.id: (context) => SearchItemAbout(),
+          SearchItemReserved.id: (context) => SearchItemReserved(),
+          SearchReservedDone.id: (context) => SearchReservedDone(),
+          CouponLists.id: (context) => CouponLists()
+        },
       ),
-      routes: {
-        HomeScreen.id: (context) => HomeScreen(),
-        SearchItemAbout.id: (context) => SearchItemAbout(),
-        SearchItemReserved.id: (context) => SearchItemReserved(),
-        SearchReservedDone.id: (context) => SearchReservedDone(),
-        CouponLists.id: (context) => CouponLists()
-      },
     );
   }
 }

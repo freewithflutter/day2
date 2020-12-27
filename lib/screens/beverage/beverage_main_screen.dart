@@ -68,6 +68,7 @@ class BeverageMain extends StatelessWidget {
                     padding: EdgeInsets.fromLTRB(20, 20, 0, 10),
                   ),
                   Container(
+                    margin: EdgeInsets.symmetric(horizontal: 20),
                     width: double.infinity,
                     height: 500,
                     child: TabBarView(
@@ -76,9 +77,9 @@ class BeverageMain extends StatelessWidget {
                           gridDelegate:
                               SliverGridDelegateWithFixedCrossAxisCount(
                             crossAxisCount: 3,
-                            childAspectRatio: 0.65,
+                            childAspectRatio: 0.45,
                           ),
-                          itemCount: 4,
+                          itemCount: 3,
                           itemBuilder: (context, index) => BeverageCoffee(
                             items: coffeeItem[index],
                           ),
@@ -111,18 +112,13 @@ List<CoffeeLists> coffeeItem = [
     subtitle: 'Brewed Coffee',
   ),
   CoffeeLists(
-    image: 'assets/images/americanodrink.png',
+    image: 'assets/images/drink2.png',
     title: '브라둨커피',
     subtitle: 'Brewed Coffee',
   ),
   CoffeeLists(
-    image: 'assets/images/latteadrink.png',
+    image: 'assets/images/drink3.png',
     title: '브라둨커피',
-    subtitle: 'Brewed Coffee',
-  ),
-  CoffeeLists(
-    image: 'assets/images/baniladrink.png',
-    title: '저쩌구 이쩌구',
     subtitle: 'Brewed Coffee',
   ),
 ];
@@ -140,7 +136,7 @@ class BeverageCoffee extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Container(
-          width: 130,
+          width: 150,
           height: 200,
           child: Card(
             child: Column(
@@ -149,12 +145,14 @@ class BeverageCoffee extends StatelessWidget {
                 SizedBox(
                   height: 20,
                 ),
-                Container(
-                  child: Image.asset(items.image),
-                  padding: EdgeInsets.symmetric(horizontal: 30),
+                Center(
+                  child: Container(
+                    child: Image.asset(items.image),
+                    // padding: EdgeInsets.symmetric(horizontal: 30),
+                  ),
                 ),
                 SizedBox(
-                  height: 40,
+                  height: 25,
                 ),
                 Container(
                   child: Text(
@@ -163,13 +161,16 @@ class BeverageCoffee extends StatelessWidget {
                       fontSize: 16,
                     ),
                   ),
-                  padding: EdgeInsets.symmetric(vertical: 3),
+                  padding: EdgeInsets.symmetric(vertical: 3, horizontal: 4),
                 ),
-                Text(
-                  items.subtitle,
-                  style: TextStyle(
-                    fontSize: 12,
+                Container(
+                  child: Text(
+                    items.subtitle,
+                    style: TextStyle(
+                      fontSize: 12,
+                    ),
                   ),
+                  padding: EdgeInsets.symmetric(horizontal: 4),
                 ),
               ],
             ),
