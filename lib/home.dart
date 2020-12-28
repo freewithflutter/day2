@@ -1,15 +1,12 @@
 import 'package:day2/screens/beverage/beverage_main_screen.dart';
+import 'package:day2/screens/coffingnote/coffingnote_intro_screen.dart';
 import 'package:day2/screens/coupon/coupon_main_screen.dart';
 import 'package:day2/screens/home__screen.dart';
 import 'package:day2/screens/searchitem/searchitem_active_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_page_indicator/flutter_page_indicator.dart';
-import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:day2/utill/default.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 import 'package:ff_navigation_bar/ff_navigation_bar.dart';
-import 'package:day2/screens/homeab.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -23,6 +20,7 @@ class _HomeState extends State<Home> {
     SearchItemActive(),
     CouponMain(),
     BeverageMain(),
+    coffingNoteIntro(),
   ];
 
   @override
@@ -56,12 +54,12 @@ class _HomeState extends State<Home> {
             label: '쿠폰',
           ),
           FFNavigationBarItem(
-            iconData: Icons.note,
-            label: 'Notes',
+            iconData: FontAwesomeIcons.coffee,
+            label: '음료소개',
           ),
           FFNavigationBarItem(
-            iconData: Icons.settings,
-            label: 'Settings',
+            iconData: Icons.sticky_note_2_outlined,
+            label: '커핑노트',
           ),
         ],
       ),
