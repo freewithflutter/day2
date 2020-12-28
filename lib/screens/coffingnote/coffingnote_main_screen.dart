@@ -68,17 +68,178 @@ class CoffingNoteMain extends StatelessWidget {
                 ],
               ),
             ),
+            // Image.asset(
+            //   'assets/images/coffingitem1.png',
+            //   fit: BoxFit.cover,
+            // ),
             Container(
-              height: 420,
+              height: 380.08,
               width: double.infinity,
               child: new Swiper(
                 itemBuilder: (BuildContext context, int index) {
-                  return new Container(
+                  return Container(
+                    padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+                    decoration: BoxDecoration(
+                      color: Colors.lightGreen,
+                      borderRadius: BorderRadius.circular(40),
+                    ),
+                    width: 350.02,
                     child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        Image.asset(
-                          'assets/images/coffingitem1.png',
-                          fit: BoxFit.cover,
+                        Row(
+                          children: [
+                            Container(
+                              height: 10,
+                              width: 10,
+                              decoration: BoxDecoration(
+                                  shape: BoxShape.circle, color: kMainColor),
+                            ),
+                            SizedBox(
+                              width: 8,
+                            ),
+                            Text(
+                              '로스터리 정보',
+                              style: TextStyle(
+                                fontSize: 20,
+                                fontWeight: FontWeight.w900,
+                              ),
+                            ),
+                          ],
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            Container(
+                              child: Column(
+                                children: [
+                                  Image.asset(
+                                    'assets/images/roasteryitem1.png',
+                                    width: 135,
+                                    fit: BoxFit.contain,
+                                  ),
+                                  Container(
+                                    padding: EdgeInsets.symmetric(vertical: 10),
+                                    child: Row(
+                                      children: [
+                                        Container(
+                                          width: 10,
+                                          height: 10,
+                                          decoration: BoxDecoration(
+                                            shape: BoxShape.circle,
+                                            color: Color(0xFFCF9775),
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          width: 8,
+                                        ),
+                                        Text(
+                                          '프릳츠',
+                                          style: TextStyle(
+                                            fontSize: 17,
+                                            fontWeight: FontWeight.w900,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  Text.rich(
+                                    TextSpan(
+                                      children: <TextSpan>[
+                                        TextSpan(
+                                          text: '25',
+                                          style: TextStyle(
+                                            fontSize: 25,
+                                            fontWeight: FontWeight.bold,
+                                            color: kMainColor,
+                                          ),
+                                        ),
+                                        TextSpan(
+                                          text: '잔',
+                                          style: TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  )
+                                ],
+                              ),
+                              padding: EdgeInsets.symmetric(vertical: 28),
+                            ),
+                            Column(
+                              children: [
+                                Image.asset(
+                                  'assets/images/roasteryitem2.png',
+                                  width: 135,
+                                  fit: BoxFit.contain,
+                                ),
+                                Container(
+                                  padding: EdgeInsets.symmetric(vertical: 10),
+                                  child: Row(
+                                    children: [
+                                      Container(
+                                        width: 10,
+                                        height: 10,
+                                        decoration: BoxDecoration(
+                                          shape: BoxShape.circle,
+                                          color: Color(0xFFF8CEAC),
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        width: 8,
+                                      ),
+                                      Text(
+                                        '프레이져',
+                                        style: TextStyle(
+                                          fontSize: 17,
+                                          fontWeight: FontWeight.w900,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                Text.rich(
+                                  TextSpan(
+                                    children: <TextSpan>[
+                                      TextSpan(
+                                        text: '25',
+                                        style: TextStyle(
+                                          fontSize: 25,
+                                          fontWeight: FontWeight.bold,
+                                          color: kMainColor,
+                                        ),
+                                      ),
+                                      TextSpan(
+                                        text: '잔',
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                )
+                              ],
+                            ),
+                          ],
+                        ),
+                        Container(
+                          child: Center(
+                            child: Text(
+                              '전체보기',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 17,
+                              ),
+                            ),
+                          ),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(20),
+                            color: Color(0xFFB06B41),
+                          ),
+                          width: 195.16,
+                          height: 40.59,
                         ),
                       ],
                     ),
@@ -86,9 +247,8 @@ class CoffingNoteMain extends StatelessWidget {
                 },
                 itemCount: 3,
                 viewportFraction: 0.85,
-                scale: 0.99,
-                pagination: SwiperPagination(
-                    margin: EdgeInsets.all(100), alignment: Alignment.topLeft),
+                scale: 0.93,
+                pagination: null,
               ),
             ),
             SizedBox(
@@ -158,6 +318,50 @@ class CoffingNoteMain extends StatelessWidget {
           ],
         ),
       ),
+    );
+  }
+}
+
+class mama {
+  final Aim1, Aim2, Aim3;
+  mama(this.Aim1, this.Aim2, this.Aim3);
+}
+
+List<Widget> raim = [
+  Aim1(),
+  Aim2(),
+  Aim3(),
+];
+
+class Aim1 extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: 300,
+      height: 300,
+      color: Colors.red,
+    );
+  }
+}
+
+class Aim2 extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: 300,
+      height: 300,
+      color: Colors.blue,
+    );
+  }
+}
+
+class Aim3 extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: 300,
+      height: 300,
+      color: Colors.yellow,
     );
   }
 }
