@@ -1,4 +1,5 @@
 import 'package:day2/screens/coffingnote/coffingnote_iteminfo_screen.dart';
+import 'package:day2/screens/coffingnote/coffingnote_rate_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:day2/utill/default.dart';
 import 'package:flutter_page_indicator/flutter_page_indicator.dart';

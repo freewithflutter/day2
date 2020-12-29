@@ -2,6 +2,7 @@ import 'package:day2/home.dart';
 import 'package:day2/provider/PlaceSearch.dart';
 import 'package:day2/screens/coffingnote/coffingnote_iteminfo_screen.dart';
 import 'package:day2/screens/coffingnote/coffingnote_main_screen.dart';
+import 'package:day2/screens/coffingnote/coffingnote_rate_screen.dart';
 import 'package:day2/screens/coupon/coupon_lists_screen.dart';
 import 'package:day2/screens/home__screen.dart';
 import 'package:day2/screens/searchitem/searchitem_about_screen.dart';
@@ -60,6 +61,7 @@ class _MyAppState extends State<MyApp> {
           CouponLists.id: (context) => CouponLists(),
           CoffingNoteMain.id: (context) => CoffingNoteMain(),
           CoffingNoteItemInfo.id: (context) => CoffingNoteItemInfo(),
+          CoffingNoteRate.id: (context) => CoffingNoteRate(),
         },
       ),
     );
