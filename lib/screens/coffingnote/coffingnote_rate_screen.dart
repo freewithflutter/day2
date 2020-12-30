@@ -3,11 +3,13 @@ import 'package:flutter/material.dart';
 
 class CoffingNoteRate extends StatefulWidget {
   static final String id = 'coffingNoteRate';
+
   @override
   _CoffingNoteRateState createState() => _CoffingNoteRateState();
 }
 
 class _CoffingNoteRateState extends State<CoffingNoteRate> {
+  double _currentSliderValue = 5.0;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -213,7 +215,7 @@ class _CoffingNoteRateState extends State<CoffingNoteRate> {
                               ),
                               child: Center(
                                 child: Text(
-                                  'Sweety',
+                                  'Body',
                                   style: TextStyle(
                                     fontSize: 17,
                                     color: Color(0xFF555454),
@@ -236,7 +238,7 @@ class _CoffingNoteRateState extends State<CoffingNoteRate> {
                               ),
                               child: Center(
                                 child: Text(
-                                  'Sweety',
+                                  'Acidity',
                                   style: TextStyle(
                                     fontSize: 17,
                                     color: Color(0xFF555454),
@@ -270,7 +272,7 @@ class _CoffingNoteRateState extends State<CoffingNoteRate> {
                         ],
                       ),
                       SizedBox(
-                        height: 30,
+                        height: 40,
                       ),
                       Container(
                         padding: EdgeInsets.symmetric(horizontal: 15),
@@ -279,6 +281,56 @@ class _CoffingNoteRateState extends State<CoffingNoteRate> {
                           style: TextStyle(
                             fontSize: 22,
                             color: Color(0xFF625C5C),
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      //TODO this is where slider starts
+                      SliderTheme(
+                        data: SliderTheme.of(context).copyWith(
+                          thumbShape: RoundSliderThumbShape(
+                            enabledThumbRadius: 25.0,
+                          ),
+                          overlayColor: Colors.white,
+                          trackHeight: 20,
+                          inactiveTrackColor: Color(0xFFD6D8E7),
+                          activeTickMarkColor: Colors.transparent,
+                          inactiveTickMarkColor: Colors.transparent,
+                          thumbColor: Colors.white,
+                          activeTrackColor: Color(0xFFEBBB9D),
+                        ),
+                        child: Slider(
+                          value: _currentSliderValue,
+                          min: 0,
+                          max: 100,
+                          divisions: 10,
+                          label: _currentSliderValue.round().toString(),
+                          onChanged: (double value) {
+                            setState(() {
+                              _currentSliderValue = value;
+                            });
+                          },
+                        ),
+                      ),
+                      SizedBox(
+                        height: 77,
+                      ),
+                      Center(
+                        child: Container(
+                          width: 162,
+                          height: 57,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(30),
+                            color: Color(0xFFEBBB9D),
+                          ),
+                          child: Center(
+                            child: Image.asset(
+                              'assets/images/airplane.png',
+                              fit: BoxFit.cover,
+                              width: 45,
+                            ),
                           ),
                         ),
                       ),
