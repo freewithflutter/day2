@@ -4,6 +4,8 @@ import 'package:day2/screens/searchitem/searchitem_reserve_scree.dart';
 import 'package:flutter/material.dart';
 import 'package:day2/utill/default.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:day2/provider/PlaceSearch.dart';
+import 'package:provider/provider.dart';
 
 //TODO 아이템 상세 페이지, 공간 예약으로 이동하는 페이지
 class SearchItemAbout extends StatefulWidget {
@@ -18,17 +20,14 @@ class _SearchItemAboutState extends State<SearchItemAbout> {
   //     this.openHour, this.type, this.description);
 
   Place place = Place(
-      '그루디 스터디카페',
-      9.1,
-      36,
-      '월곡역 3번 출구',
-      2000,
-      24,
-      '스터디카페/독서',
-      '<그루스터디카페 월곡역> \n 7호선 월곡역 1번 출구 도보 5분거리에 위치한 그루스터디카페 입니다. 연중무휴로 운영중이며 영업시간은 오전 9시부터 오후 12시까지 입니다. 최대 10명이 이용할 수 있는 스터디룸이 '
-          '2개가 마련되어 있습니다. 룸이 폴딩도어로 구분되어있어 7분이상 '
-          '이용시 룸이 삐어있을경우 룸을 합쳐드립나다');
-
+      name: '그루스터디카페',
+      rating: 9.2,
+      reviewCount: 32,
+      location: '월곡역 2번 출구',
+      price: 2000,
+      openHour: 24,
+      type: '스터디카페/독서실',
+      description: '그루스터디카페\n그루스터디카페그루스터디카페그루스터디카페그루스터디카페그루스터디카페');
   @override
   Widget build(BuildContext context) {
     return Scaffold(

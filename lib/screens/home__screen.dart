@@ -1,4 +1,5 @@
 import 'package:day2/home.dart';
+import 'package:day2/provider/NormalPlaceSearch.dart';
 import 'package:day2/provider/PlaceSearch.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_page_indicator/flutter_page_indicator.dart';
@@ -27,6 +28,8 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     final placeSearch = Provider.of<PlaceSearch>(context, listen: false);
+    final normalPlaceSearch =
+        Provider.of<NormalPlaceSearch>(context, listen: false);
     return SingleChildScrollView(
       child: Container(
         width: double.infinity,
@@ -231,6 +234,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                 name: place.name,
                                                 location: place.location,
                                                 price: place.price,
+                                                image: place.image,
                                               );
                                             }),
                                       ),
@@ -243,6 +247,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                     children: [
                                       Expanded(
                                         child: GridView.builder(
+                                          padding: EdgeInsets.zero,
                                           gridDelegate:
                                               SliverGridDelegateWithFixedCrossAxisCount(
                                             crossAxisCount: 2,
@@ -250,13 +255,21 @@ class _HomeScreenState extends State<HomeScreen> {
                                             crossAxisSpacing: 10,
                                             childAspectRatio: 0.86,
                                           ),
-                                          itemCount: 4,
+                                          itemCount: normalPlaceSearch
+                                              .normalPlaceSearch.length,
                                           physics:
                                               NeverScrollableScrollPhysics(),
                                           scrollDirection: Axis.vertical,
-                                          itemBuilder: (context, index) =>
-                                              FlanzRightItem(
-                                                  rightItem: rightItems[index]),
+                                          itemBuilder: (context, index) {
+                                            final normal = normalPlaceSearch
+                                                .normalPlaceSearch[index];
+                                            return FlanzRightItem(
+                                              image: normal.image,
+                                              title: normal.title,
+                                              place: normal.place,
+                                              price: normal.price,
+                                            );
+                                          },
                                         ),
                                       ),
                                     ],
@@ -411,10 +424,12 @@ class FlanzItem extends StatelessWidget {
     @required this.name,
     @required this.location,
     @required this.price,
+    @required this.image,
   }) : super(key: key);
   final String name;
   final String location;
   final int price;
+  final String image;
 
   @override
   Widget build(BuildContext context) {
@@ -424,7 +439,7 @@ class FlanzItem extends StatelessWidget {
         children: [
           Container(
             child: Image.asset(
-              'assets/images/item1.jpg',
+              image,
               fit: BoxFit.cover,
             ),
             width: 200,
@@ -477,9 +492,15 @@ class FlanzItem extends StatelessWidget {
 class FlanzRightItem extends StatelessWidget {
   const FlanzRightItem({
     Key key,
-    this.rightItem,
+    this.title,
+    this.place,
+    this.price,
+    this.image,
   }) : super(key: key);
-  final ItemRightLists rightItem;
+  final String title;
+  final String place;
+  final String price;
+  final String image;
 
   @override
   Widget build(BuildContext context) {
@@ -489,7 +510,7 @@ class FlanzRightItem extends StatelessWidget {
         children: [
           Container(
             child: Image.asset(
-              rightItem.image,
+              image,
               fit: BoxFit.cover,
             ),
             width: 200,
@@ -498,14 +519,14 @@ class FlanzRightItem extends StatelessWidget {
           Container(
             padding: EdgeInsets.only(top: 10),
             child: Text(
-              rightItem.title,
+              title,
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
           ),
           Row(
             children: [
               Icon(Icons.location_on_outlined, color: klightGrayBlueColor),
-              Text(rightItem.place)
+              Text(place),
             ],
           ),
           Container(
@@ -515,7 +536,7 @@ class FlanzRightItem extends StatelessWidget {
               TextSpan(
                 children: <TextSpan>[
                   TextSpan(
-                    text: rightItem.price,
+                    text: price,
                     style: TextStyle(
                       fontSize: 17,
                       fontWeight: FontWeight.bold,

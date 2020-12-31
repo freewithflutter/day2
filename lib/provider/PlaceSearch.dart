@@ -6,12 +6,46 @@ class PlaceSearch with ChangeNotifier {
   //     this.openHour, this.type, this.description);
 
   List<Place> _placeList = [
-    Place('그루스터디카페', 9.2, 32, '월곡역 3번출구', 2000, 24, '스터디카페/독서실',
-        '그루스터디카페\n그루스터디카페그루스터디카페그루스터디카페그루스터디카페그루스터디카페'),
-    Place('플렅카페', 9.2, 32, '월곡역 3번출구', 3000, 24, '스터디카페/독서실',
-        '그루스터디카페\n그루스터디카페그루스터디카페그루스터디카페그루스터디카페그루스터디카페'),
-    Place('리액트카페', 9.2, 32, '월곡역 3번출구', 4000, 24, '스터디카페/독서실',
-        '그루스터디카페\n그루스터디카페그루스터디카페그루스터디카페그루스터디카페그루스터디카페'),
+    Place(
+        image: "assets/images/item1.jpg",
+        name: '그루스터디카페',
+        rating: 9.2,
+        reviewCount: 32,
+        location: '월곡역 3번 출구',
+        price: 2000,
+        openHour: 24,
+        type: '스터디카페/독서실',
+        description: '그루스터디카페\n그루스터디카페그루스터디카페그루스터디카페그루스터디카페그루스터디카페'),
+    Place(
+        image: "assets/images/item2.jpeg",
+        name: '그루스터디카페',
+        rating: 9.2,
+        reviewCount: 32,
+        location: '월곡역 3번 출구',
+        price: 2000,
+        openHour: 24,
+        type: '스터디카페/독서실',
+        description: '그루스터디카페\n그루스터디카페그루스터디카페그루스터디카페그루스터디카페그루스터디카페'),
+    Place(
+        image: "assets/images/item3.jpg",
+        name: '그루스터디카페',
+        rating: 9.2,
+        reviewCount: 32,
+        location: '월곡역 3번 출구',
+        price: 2000,
+        openHour: 24,
+        type: '스터디카페/독서실',
+        description: '그루스터디카페\n그루스터디카페그루스터디카페그루스터디카페그루스터디카페그루스터디카페'),
+    Place(
+        image: "assets/images/item4.jpg",
+        name: '그루스터디카페',
+        rating: 9.2,
+        reviewCount: 32,
+        location: '월곡역 3번 출구',
+        price: 2000,
+        openHour: 24,
+        type: '스터디카페/독서실',
+        description: '그루스터디카페\n그루스터디카페그루스터디카페그루스터디카페그루스터디카페그루스터디카페'),
   ];
 
   // http => server 요청
