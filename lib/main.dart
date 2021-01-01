@@ -1,6 +1,6 @@
 import 'package:day2/home.dart';
+import 'package:day2/provider/NormalPaceSearch.dart';
 import 'package:day2/provider/PlaceSearch.dart';
-import 'package:day2/provider/NormalPlaceSearch.dart';
 import 'package:day2/screens/coffingnote/coffingnote_iteminfo_screen.dart';
 import 'package:day2/screens/coffingnote/coffingnote_main_screen.dart';
 import 'package:day2/screens/coffingnote/coffingnote_rate_screen.dart';
@@ -35,7 +35,7 @@ class _MyAppState extends State<MyApp> {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider.value(value: PlaceSearch()),
-        ChangeNotifierProvider.value(value: NormalPlaceSearch())
+        ChangeNotifierProvider.value(value: NormalPlaceSearch()),
       ],
       child: MaterialApp(
         title: 'Flutter Demo',
@@ -69,5 +69,12 @@ class _MyAppState extends State<MyApp> {
         },
       ),
     );
+  }
+}
+
+class aa extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container();
   }
 }

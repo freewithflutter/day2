@@ -8,7 +8,7 @@ class Place {
   int openHour;
   String type;
   String description;
-
+  int aim;
   Place(
       {this.image,
       this.name,
@@ -18,5 +18,6 @@ class Place {
       this.price,
       this.openHour,
       this.type,
+      this.aim,
       this.description});
 }

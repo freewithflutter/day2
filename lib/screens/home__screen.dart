@@ -1,6 +1,10 @@
+import 'dart:async';
+
 import 'package:day2/home.dart';
-import 'package:day2/provider/NormalPlaceSearch.dart';
+import 'package:day2/model/normalPlace.dart';
+import 'package:day2/provider/NormalPaceSearch.dart';
 import 'package:day2/provider/PlaceSearch.dart';
+import 'package:day2/screens/searchitem/searchitem_about_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_page_indicator/flutter_page_indicator.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
@@ -26,6 +30,19 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   @override
+  void initState() {
+    // TODO: implement initState
+    Timer(Duration(seconds: 3), () {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => HomeScreen(),
+        ),
+      );
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
     final placeSearch = Provider.of<PlaceSearch>(context, listen: false);
     final normalPlaceSearch =
@@ -44,33 +61,39 @@ class _HomeScreenState extends State<HomeScreen> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  SizedBox(
-                    height: 40,
-                    width: 350,
-                    child: TextField(
-                      decoration: InputDecoration(
-                        contentPadding:
-                            EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-                        enabledBorder: OutlineInputBorder(
-                          borderSide:
-                              BorderSide(width: 1, color: klightGrayBlueColor),
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderSide:
-                              BorderSide(width: 1, color: klightGrayBlueColor),
-                        ),
-                        hintText: '지역,지하철역으로 검색하세요',
-                        hintStyle: TextStyle(color: kSearchTextColor),
-                        suffixIcon: Icon(
-                          Icons.search,
-                          color: kMainColor,
+                  Expanded(
+                    flex: 7,
+                    child: SizedBox(
+                      height: 40,
+                      width: 350,
+                      child: TextField(
+                        decoration: InputDecoration(
+                          contentPadding: EdgeInsets.symmetric(
+                              vertical: 10, horizontal: 10),
+                          enabledBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                                width: 1, color: klightGrayBlueColor),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                                width: 1, color: klightGrayBlueColor),
+                          ),
+                          hintText: '지역,지하철역으로 검색하세요',
+                          hintStyle: TextStyle(color: kSearchTextColor),
+                          suffixIcon: Icon(
+                            Icons.search,
+                            color: kMainColor,
+                          ),
                         ),
                       ),
                     ),
                   ),
-                  Icon(
-                    Icons.map_outlined,
-                    color: kMainColor,
+                  Expanded(
+                    flex: 1,
+                    child: Icon(
+                      Icons.map_outlined,
+                      color: kMainColor,
+                    ),
                   ),
                 ],
               ),
@@ -205,12 +228,13 @@ class _HomeScreenState extends State<HomeScreen> {
                             ),
                           ),
                           Container(
-                            height: 455,
+                            height: MediaQuery.of(context).size.height / 2,
                             width: double.infinity,
                             child: TabBarView(
                               children: [
                                 Container(
                                   child: Column(
+                                    mainAxisSize: MainAxisSize.min,
                                     children: [
                                       Expanded(
                                         child: GridView.builder(
@@ -220,7 +244,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                               crossAxisCount: 2,
                                               mainAxisSpacing: 10,
                                               crossAxisSpacing: 10,
-                                              childAspectRatio: 0.86,
+                                              childAspectRatio: 0.76,
                                             ),
                                             itemCount:
                                                 placeSearch.placeList.length,
@@ -231,10 +255,11 @@ class _HomeScreenState extends State<HomeScreen> {
                                               final place =
                                                   placeSearch.placeList[index];
                                               return FlanzItem(
+                                                image: place.image,
                                                 name: place.name,
                                                 location: place.location,
                                                 price: place.price,
-                                                image: place.image,
+                                                aim: place.aim,
                                               );
                                             }),
                                       ),
@@ -255,14 +280,13 @@ class _HomeScreenState extends State<HomeScreen> {
                                             crossAxisSpacing: 10,
                                             childAspectRatio: 0.86,
                                           ),
-                                          itemCount: normalPlaceSearch
-                                              .normalPlaceSearch.length,
+                                          itemCount: 4,
                                           physics:
                                               NeverScrollableScrollPhysics(),
                                           scrollDirection: Axis.vertical,
                                           itemBuilder: (context, index) {
                                             final normal = normalPlaceSearch
-                                                .normalPlaceSearch[index];
+                                                .normalPlaceLists[index];
                                             return FlanzRightItem(
                                               image: normal.image,
                                               title: normal.title,
@@ -424,66 +448,79 @@ class FlanzItem extends StatelessWidget {
     @required this.name,
     @required this.location,
     @required this.price,
-    @required this.image,
+    this.image,
+    this.aim,
   }) : super(key: key);
+  final String image;
   final String name;
   final String location;
   final int price;
-  final String image;
+  final int aim;
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Container(
-            child: Image.asset(
-              image,
-              fit: BoxFit.cover,
+    return FlatButton(
+      onPressed: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => SearchItemAbout(value: aim),
+          ),
+        );
+      },
+      padding: EdgeInsets.zero,
+      child: Container(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Container(
+              child: Image.asset(
+                image,
+                fit: BoxFit.cover,
+              ),
+              width: 200,
+              height: 140,
             ),
-            width: 200,
-            height: 140,
-          ),
-          Container(
-            padding: EdgeInsets.only(top: 10),
-            child: Text(
-              name,
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-            ),
-          ),
-          Row(
-            children: [
-              Icon(Icons.location_on_outlined, color: klightGrayBlueColor),
-              Text(location)
-            ],
-          ),
-          Container(
-            width: 200,
-            alignment: Alignment.bottomRight,
-            child: Text.rich(
-              TextSpan(
-                children: <TextSpan>[
-                  TextSpan(
-                    text: '$price',
-                    style: TextStyle(
-                      fontSize: 17,
-                      fontWeight: FontWeight.bold,
-                      color: kMainColor,
-                    ),
-                  ),
-                  TextSpan(
-                    text: '원/시간',
-                    style: TextStyle(
-                      fontSize: 17,
-                      color: Colors.black,
-                    ),
-                  ),
-                ],
+            Container(
+              padding: EdgeInsets.only(top: 10),
+              child: Text(
+                name,
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
             ),
-          ),
-        ],
+            Row(
+              children: [
+                Icon(Icons.location_on_outlined, color: klightGrayBlueColor),
+                Text(location)
+              ],
+            ),
+            Container(
+              width: 200,
+              alignment: Alignment.bottomRight,
+              child: Text.rich(
+                TextSpan(
+                  children: <TextSpan>[
+                    TextSpan(
+                      text: '$price',
+                      style: TextStyle(
+                        fontSize: 17,
+                        fontWeight: FontWeight.bold,
+                        color: kMainColor,
+                      ),
+                    ),
+                    TextSpan(
+                      text: '원/시간',
+                      style: TextStyle(
+                        fontSize: 17,
+                        color: Colors.black,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -492,15 +529,12 @@ class FlanzItem extends StatelessWidget {
 class FlanzRightItem extends StatelessWidget {
   const FlanzRightItem({
     Key key,
-    this.title,
-    this.place,
-    this.price,
-    this.image,
+    @required this.image,
+    @required this.title,
+    @required this.place,
+    @required this.price,
   }) : super(key: key);
-  final String title;
-  final String place;
-  final String price;
-  final String image;
+  final String image, title, place, price;
 
   @override
   Widget build(BuildContext context) {
@@ -592,11 +626,13 @@ List<ItemLists> items = [
 
 class ItemRightLists {
   final String image, title, place, price;
+  final int aim;
   ItemRightLists({
     this.image,
     this.title,
     this.place,
     this.price,
+    this.aim,
   });
 }
 

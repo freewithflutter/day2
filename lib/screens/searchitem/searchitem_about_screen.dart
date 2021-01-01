@@ -8,28 +8,19 @@ import 'package:day2/provider/PlaceSearch.dart';
 import 'package:provider/provider.dart';
 
 //TODO 아이템 상세 페이지, 공간 예약으로 이동하는 페이지
-class SearchItemAbout extends StatefulWidget {
-  static final String id = 'searchItemAbout';
 
-  @override
-  _SearchItemAboutState createState() => _SearchItemAboutState();
-}
-
-class _SearchItemAboutState extends State<SearchItemAbout> {
+class SearchItemAbout extends StatelessWidget {
   // Place(this.name, this.rating, this.reviewCount, this.location, this.price,
   //     this.openHour, this.type, this.description);
-
-  Place place = Place(
-      name: '그루스터디카페',
-      rating: 9.2,
-      reviewCount: 32,
-      location: '월곡역 2번 출구',
-      price: 2000,
-      openHour: 24,
-      type: '스터디카페/독서실',
-      description: '그루스터디카페\n그루스터디카페그루스터디카페그루스터디카페그루스터디카페그루스터디카페');
+  static final String id = 'searchItemAbout';
+  SearchItemAbout({
+    Key key,
+    this.value,
+  }) : super(key: key);
+  final int value;
   @override
   Widget build(BuildContext context) {
+    final placeSearch = Provider.of<PlaceSearch>(context, listen: false);
     return Scaffold(
       extendBodyBehindAppBar: true,
       backgroundColor: Colors.white,
@@ -52,7 +43,7 @@ class _SearchItemAboutState extends State<SearchItemAbout> {
               decoration: BoxDecoration(
                 image: DecorationImage(
                   image: AssetImage(
-                    'assets/images/item1.jpg',
+                    placeSearch.placeList[value].image,
                   ),
                   fit: BoxFit.cover,
                 ),
@@ -61,7 +52,7 @@ class _SearchItemAboutState extends State<SearchItemAbout> {
             Padding(
               padding: const EdgeInsets.fromLTRB(20, 30, 0, 10),
               child: Text(
-                '${place.name}',
+                placeSearch.placeList[1].name,
                 style: TextStyle(fontSize: 28, fontWeight: FontWeight.w700),
               ),
             ), //item_title
@@ -79,7 +70,7 @@ class _SearchItemAboutState extends State<SearchItemAbout> {
                     width: 10,
                   ),
                   Text(
-                    '${place.rating}',
+                    '${placeSearch.placeList[1].rating}',
                     style: TextStyle(
                       fontSize: 18,
                       color: Colors.grey.shade600,
@@ -99,7 +90,7 @@ class _SearchItemAboutState extends State<SearchItemAbout> {
                     width: 10,
                   ),
                   Text(
-                    '후기 ${place.reviewCount}개',
+                    '후기 ${placeSearch.placeList[1].reviewCount}개',
                     style: TextStyle(
                       fontSize: 18,
                       color: kMainColor,
@@ -117,7 +108,7 @@ class _SearchItemAboutState extends State<SearchItemAbout> {
                     children: [
                       Icon(Icons.location_on_outlined),
                       Text(
-                        '${place.location}',
+                        '${placeSearch.placeList[1].location}',
                         style: TextStyle(fontSize: 16),
                       ),
                     ],
@@ -127,7 +118,7 @@ class _SearchItemAboutState extends State<SearchItemAbout> {
                       Text.rich(
                         TextSpan(children: <TextSpan>[
                           TextSpan(
-                            text: '${place.price}',
+                            text: '${placeSearch.placeList[1].price}',
                             style: TextStyle(
                               color: kMainColor,
                               fontWeight: FontWeight.bold,
@@ -163,7 +154,7 @@ class _SearchItemAboutState extends State<SearchItemAbout> {
                                 fontSize: 14, fontWeight: FontWeight.bold),
                           ),
                           TextSpan(
-                            text: '  ${place.openHour}간',
+                            text: '  ${placeSearch.placeList[1].openHour}간',
                             style: TextStyle(fontSize: 14, color: Colors.grey),
                           ),
                         ]),
@@ -174,12 +165,12 @@ class _SearchItemAboutState extends State<SearchItemAbout> {
                     child: Text.rich(
                       TextSpan(children: <TextSpan>[
                         TextSpan(
-                          text: '업종형태',
+                          text: "업종형태",
                           style: TextStyle(
                               fontSize: 14, fontWeight: FontWeight.bold),
                         ),
                         TextSpan(
-                          text: '  ${place.type}',
+                          text: placeSearch.placeList[1].type,
                           style: TextStyle(fontSize: 14, color: Colors.grey),
                         ),
                       ]),
@@ -278,7 +269,7 @@ class _SearchItemAboutState extends State<SearchItemAbout> {
                   ),
                   Container(
                     child: Text(
-                      '${place.description}',
+                      placeSearch.placeList[1].description,
                       style: TextStyle(height: 1.6, fontSize: 16),
                     ),
                   ),

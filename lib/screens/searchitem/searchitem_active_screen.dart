@@ -1,9 +1,14 @@
+import 'package:day2/provider/NormalPaceSearch.dart';
+import 'package:day2/provider/PlaceSearch.dart';
 import 'package:day2/screens/searchitem/searchitem_about_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:day2/utill/default.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:provider/provider.dart';
 
 //TODO 상품검색 메인 페이지
+
+int hey;
 
 class SearchItemActive extends StatefulWidget {
   @override
@@ -13,6 +18,9 @@ class SearchItemActive extends StatefulWidget {
 class _SearchItemActiveState extends State<SearchItemActive> {
   @override
   Widget build(BuildContext context) {
+    final placeSearch = Provider.of<PlaceSearch>(context, listen: false);
+    final normalPlaceSearch =
+        Provider.of<NormalPlaceSearch>(context, listen: false);
     return SingleChildScrollView(
       physics: NeverScrollableScrollPhysics(),
       child: Container(
@@ -186,17 +194,44 @@ class _SearchItemActiveState extends State<SearchItemActive> {
                                       crossAxisCount: 1,
                                       mainAxisSpacing: 10,
                                       childAspectRatio: 1.4),
-                              itemCount: 4,
-                              itemBuilder: (context, index) => SearchItemLists(
-                                item: items[index],
-                              ),
+                              itemCount: placeSearch.placeList.length,
+                              itemBuilder: (context, index) {
+                                final place = placeSearch.placeList[index];
+                                return SearchItemLists(
+                                  image: place.image,
+                                  name: place.name,
+                                  rating: place.rating,
+                                  reviewCount: place.reviewCount,
+                                  location: place.location,
+                                  aim: place.aim,
+                                  price: place.price,
+                                );
+                              },
                             ),
                           ),
-                          Expanded(
-                            child: Container(
-                              width: 100,
-                              color: Colors.lightGreen,
-                              height: 100,
+                          Container(
+                            child: GridView.builder(
+                              padding: EdgeInsets.zero,
+                              gridDelegate:
+                                  SliverGridDelegateWithFixedCrossAxisCount(
+                                      crossAxisCount: 1,
+                                      mainAxisSpacing: 10,
+                                      childAspectRatio: 1.4),
+                              itemCount:
+                                  normalPlaceSearch.normalPlaceLists.length,
+                              itemBuilder: (context, index) {
+                                final normal =
+                                    normalPlaceSearch.normalPlaceLists[index];
+                                return SearchRightItemLists(
+                                  image: normal.image,
+                                  name: normal.title,
+                                  rating: normal.rate,
+                                  reviewCount: normal.rateCount,
+                                  location: normal.place,
+                                  aim: normal.aim,
+                                  price: normal.price,
+                                );
+                              },
                             ),
                           ),
                         ],
@@ -213,12 +248,20 @@ class _SearchItemActiveState extends State<SearchItemActive> {
   }
 }
 
-class SearchItemLists extends StatelessWidget {
-  const SearchItemLists({
+class SearchRightItemLists extends StatelessWidget {
+  const SearchRightItemLists({
     Key key,
-    this.item,
+    this.image,
+    this.name,
+    this.location,
+    this.price,
+    this.rating,
+    this.reviewCount,
+    this.aim,
   }) : super(key: key);
-  final ItemLists item;
+  final String image, name, location, price;
+  final int reviewCount, aim;
+  final double rating;
 
   @override
   Widget build(BuildContext context) {
@@ -227,7 +270,14 @@ class SearchItemLists extends StatelessWidget {
         children: [
           FlatButton(
             onPressed: () {
-              Navigator.pushNamed(context, SearchItemAbout.id);
+              print(aim);
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => SearchItemAbout(value: aim),
+                ),
+              );
+              setState(hey) {}
             },
             child: Container(
               child: Padding(
@@ -239,7 +289,7 @@ class SearchItemLists extends StatelessWidget {
                       height: 200,
                       decoration: BoxDecoration(
                         image: DecorationImage(
-                          image: AssetImage(item.image),
+                          image: AssetImage(image),
                           repeat: ImageRepeat.repeat,
                           fit: BoxFit.none,
                         ),
@@ -249,7 +299,7 @@ class SearchItemLists extends StatelessWidget {
                       height: 10,
                     ),
                     Text(
-                      item.title,
+                      name,
                       style:
                           TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                     ),
@@ -261,7 +311,7 @@ class SearchItemLists extends StatelessWidget {
                             Icons.location_on_outlined,
                             color: klightGrayBlueColor,
                           ),
-                          Text(item.place)
+                          Text(location),
                         ],
                       ),
                     ),
@@ -278,7 +328,7 @@ class SearchItemLists extends StatelessWidget {
                               Container(
                                 margin: EdgeInsets.symmetric(horizontal: 5),
                                 child: Text(
-                                  item.rate,
+                                  '$rating',
                                   style: TextStyle(
                                     fontSize: 18,
                                     color: kTextDarkGaryColor,
@@ -286,7 +336,7 @@ class SearchItemLists extends StatelessWidget {
                                 ),
                               ),
                               Text(
-                                item.rateLength,
+                                '$reviewCount',
                                 style: TextStyle(
                                   fontSize: 18,
                                   color: kTextlighGaryColor,
@@ -300,7 +350,134 @@ class SearchItemLists extends StatelessWidget {
                             TextSpan(
                               children: <TextSpan>[
                                 TextSpan(
-                                  text: item.price,
+                                  text: price,
+                                  style: TextStyle(
+                                    fontSize: 21,
+                                    fontWeight: FontWeight.bold,
+                                    color: kMainColor,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
+      padding: EdgeInsets.only(top: 10, bottom: 0),
+    );
+  }
+}
+
+class SearchItemLists extends StatelessWidget {
+  const SearchItemLists({
+    Key key,
+    this.image,
+    this.name,
+    this.location,
+    this.price,
+    this.rating,
+    this.reviewCount,
+    this.aim,
+  }) : super(key: key);
+  final String image, name, location;
+  final int price, reviewCount, aim;
+  final double rating;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: Column(
+        children: [
+          FlatButton(
+            onPressed: () {
+              print(aim);
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => SearchItemAbout(value: aim),
+                ),
+              );
+              setState(hey) {}
+            },
+            child: Container(
+              child: Padding(
+                padding: const EdgeInsets.only(right: 5),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Container(
+                      height: 200,
+                      decoration: BoxDecoration(
+                        image: DecorationImage(
+                          image: AssetImage(image),
+                          repeat: ImageRepeat.repeat,
+                          fit: BoxFit.none,
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Text(
+                      name,
+                      style:
+                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                    ),
+                    Container(
+                      padding: EdgeInsets.symmetric(vertical: 3),
+                      child: Row(
+                        children: [
+                          Icon(
+                            Icons.location_on_outlined,
+                            color: klightGrayBlueColor,
+                          ),
+                          Text(location),
+                        ],
+                      ),
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Container(
+                          child: Row(
+                            children: [
+                              Icon(
+                                Icons.star,
+                                color: Colors.yellow.shade700,
+                              ),
+                              Container(
+                                margin: EdgeInsets.symmetric(horizontal: 5),
+                                child: Text(
+                                  '$rating',
+                                  style: TextStyle(
+                                    fontSize: 18,
+                                    color: kTextDarkGaryColor,
+                                  ),
+                                ),
+                              ),
+                              Text(
+                                '$reviewCount',
+                                style: TextStyle(
+                                  fontSize: 18,
+                                  color: kTextlighGaryColor,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        Container(
+                          child: Text.rich(
+                            TextSpan(
+                              children: <TextSpan>[
+                                TextSpan(
+                                  text: '$price',
                                   style: TextStyle(
                                     fontSize: 21,
                                     fontWeight: FontWeight.bold,
@@ -331,50 +508,3 @@ class SearchItemLists extends StatelessWidget {
     );
   }
 }
-
-class ItemLists {
-  final String image, title, place, price, rate, rateLength;
-  ItemLists({
-    this.image,
-    this.title,
-    this.place,
-    this.price,
-    this.rate,
-    this.rateLength,
-  });
-}
-
-List<ItemLists> items = [
-  ItemLists(
-    title: "그루스터디카페",
-    price: "2000",
-    rate: '9.2',
-    rateLength: '(32)',
-    place: "월곡역",
-    image: "assets/images/item1.jpg",
-  ),
-  ItemLists(
-    title: "델리에 파티",
-    price: "4000",
-    place: "건대입구역",
-    rate: '8.7',
-    rateLength: '(52)',
-    image: "assets/images/item2.jpeg",
-  ),
-  ItemLists(
-    title: "위워크 성수역점",
-    price: "3500",
-    place: "성수역",
-    rate: '9.5',
-    rateLength: '(12)',
-    image: "assets/images/item3.jpg",
-  ),
-  ItemLists(
-    title: "팝스터디카페",
-    price: '2500',
-    place: "수유역",
-    rate: '6.4',
-    rateLength: '(112)',
-    image: "assets/images/item4.jpg",
-  ),
-];
