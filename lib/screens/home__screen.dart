@@ -4,6 +4,7 @@ import 'package:day2/home.dart';
 import 'package:day2/model/normalPlace.dart';
 import 'package:day2/provider/NormalPaceSearch.dart';
 import 'package:day2/provider/PlaceSearch.dart';
+import 'package:day2/screens/login/login_mainpage_screen.dart';
 import 'package:day2/screens/searchitem/searchitem_about_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_page_indicator/flutter_page_indicator.dart';
@@ -29,19 +30,6 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  @override
-  void initState() {
-    // TODO: implement initState
-    Timer(Duration(seconds: 3), () {
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => HomeScreen(),
-        ),
-      );
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     final placeSearch = Provider.of<PlaceSearch>(context, listen: false);
@@ -90,9 +78,14 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                   Expanded(
                     flex: 1,
-                    child: Icon(
-                      Icons.map_outlined,
-                      color: kMainColor,
+                    child: FlatButton(
+                      onPressed: () {
+                        Navigator.pushNamed(context, LoginMain.id);
+                      },
+                      child: Icon(
+                        Icons.map_outlined,
+                        color: kMainColor,
+                      ),
                     ),
                   ),
                 ],

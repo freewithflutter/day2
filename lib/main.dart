@@ -6,6 +6,8 @@ import 'package:day2/screens/coffingnote/coffingnote_main_screen.dart';
 import 'package:day2/screens/coffingnote/coffingnote_rate_screen.dart';
 import 'package:day2/screens/coupon/coupon_lists_screen.dart';
 import 'package:day2/screens/home__screen.dart';
+import 'package:day2/screens/login/login_active_screen.dart';
+import 'package:day2/screens/login/login_mainpage_screen.dart';
 import 'package:day2/screens/searchitem/searchitem_about_screen.dart';
 import 'package:day2/screens/searchitem/searchitem_final_screen.dart';
 import 'package:day2/screens/searchitem/searchitem_reserve_scree.dart';
@@ -66,15 +68,10 @@ class _MyAppState extends State<MyApp> {
           CoffingNoteMain.id: (context) => CoffingNoteMain(),
           CoffingNoteItemInfo.id: (context) => CoffingNoteItemInfo(),
           CoffingNoteRate.id: (context) => CoffingNoteRate(),
+          LoginMain.id: (context) => LoginMain(),
+          LoginActivePage.id: (context) => LoginActivePage(),
         },
       ),
     );
-  }
-}
-
-class aa extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Container();
   }
 }
